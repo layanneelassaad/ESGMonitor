@@ -75,4 +75,4 @@ Option 2: Docker compose
 docker compose up --build
 # API: http://127.0.0.1:8000/api/v1/docs
 ```
-
+> Note: On first API call, Hugging Face models download to cache. For offline/CI runs, set TRANSFORMERS_OFFLINE=1 (chunking falls back to character windows).
