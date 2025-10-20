@@ -1,4 +1,28 @@
-env/
-.venv/
-__pycache__
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Environments
+.venv/
+venv/
+env/
+.env
+.env.*   # e.g., .env.local
+
+# Node / frontend
+node_modules/
+frontend/dist/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Build / tooling
+.coverage
+pytest_cache/
+*.log
+
+# Editor
+.vscode/
+.idea/
