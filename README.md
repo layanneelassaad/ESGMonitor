@@ -7,9 +7,9 @@
 ## 1) Background
 
 ### What this is
-ESG Monitor is a compact, end-to-end AI application that ingests PDF/text sustainability reports and produces:
-- **Summaries** of the document (token-aware, chunked)
-- **Topic tags** across ESG pillars via **zero-shot classification** (no custom training)
+ESG Monitor ingests PDF or text sustainability reports and produces:
+- **Summaries** of the document 
+- **Topic tags** across ESG pillars via **zero-shot classification** 
 - **Explainable E/S/G sub-scores** with contribution breakdowns
 - **Branch/location summaries** using NER-detected locations
 - **Persisted artifacts** (documents + scores) in Postgres
@@ -18,13 +18,12 @@ ESG Monitor is a compact, end-to-end AI application that ingests PDF/text sustai
 
 ## 2) Features
 - **FastAPI** (`/api/v1`) with typed Pydantic schemas & CORS
-- **Transformers pipelines** (summarization, NER, zero-shot, sentiment) with **CPU/GPU fallback**
-- **Token-aware chunking** with overlap + **offline fallback**
-- **Explainable scoring**: E/S/G + sentiment weights → total score with contributions
-- **Postgres** persistence; **auto-create tables** on startup (demo friendly)
+- **Transformers pipelines** (summarization, NER, zero-shot, sentiment)
+- **Token-aware chunking** with overlap and **offline fallback**
+- **Explainable scoring**: E/S/G + sentiment weights give total score with contributions
+- **Postgres** persistence; **auto-create tables** on startup 
 - **Docker Compose** for one-command spin-up
-- **Pytest + GitHub Actions** CI; Ruff for linting
-- Minimal **React** frontend (Vite)
+- **React** frontend
 
 ---
 
@@ -37,7 +36,7 @@ ESG Monitor is a compact, end-to-end AI application that ingests PDF/text sustai
 
 - Docker (optional, for compose)
 
-- PostgreSQL (optional locally; compose provides one)
+- PostgreSQL (optional locally, compose provides one)
 
 ---
 
@@ -76,3 +75,15 @@ docker compose up --build
 # API: http://127.0.0.1:8000/api/v1/docs
 ```
 > Note: On first API call, Hugging Face models download to cache. For offline/CI runs, set TRANSFORMERS_OFFLINE=1 (chunking falls back to character windows).
+
+---
+
+## 4) Models & Attribution
+
+Summarization: facebook/bart-large-cnn (seq2seq abstractive summarization)
+
+Zero-shot classification: facebook/bart-large-mnli (NLI-based label scoring across ESG taxonomies)
+
+Named-entity recognition: dslim/bert-base-NER with aggregation_strategy="simple" (span-level entities, robust to subword splits)
+
+Sentiment: distilbert-base-uncased-finetuned-sst-2-english (binary polarity; used as a small prior on overall score)
