@@ -1,0 +1,22 @@
+version: '3.9'
+services:
+api:
+build: ./backend
+ports: ["8000:8000"]
+environment:
+- DB_HOST=db
+- DB_PORT=5432
+- DB_USER=esg
+- DB_PASSWORD=esg
+- DB_NAME=esg_monitor
+depends_on: [db]
+db:
+image: postgres:16
+environment:
+POSTGRES_DB: esg_monitor
+POSTGRES_USER: esg
+POSTGRES_PASSWORD: esg
+ports: ["5432:5432"]
+volumes: ["pgdata:/var/lib/postgresql/data"]
+volumes:
+pgdata:

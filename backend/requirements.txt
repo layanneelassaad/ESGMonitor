@@ -1,0 +1,17 @@
+fastapi==0.115.2
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+SQLAlchemy==2.0.36
+psycopg2-binary==2.9.9
+python-multipart==0.0.12
+requests==2.32.3
+structlog==24.1.0
+transformers==4.44.2
+torch>=2.2.0
+nltk==3.9.1
+pdfplumber==0.11.4
+chardet==5.2.0
+scikit-learn==1.5.2
+pytest==8.3.3
+ruff==0.6.9
